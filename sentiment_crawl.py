@@ -26,5 +26,4 @@ for row in rows:
 sentdex = pd.DataFrame(parse_table)
 sentdex.columns = [['Ticker', 'Name', 'Volume of Mention', 'Sentiment', 'Rising or Falling']]
 print(sentdex)
-sentdex.to_excel('data_sample.xlsx')
 
