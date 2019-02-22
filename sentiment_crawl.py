@@ -27,6 +27,5 @@ def sentiment_crawl():
     sentdex = pd.DataFrame(parse_table)
     sentdex.columns = ['Ticker', 'Name', 'Volume of Mention', 'Sentiment', 'Rising or Falling']
     print(sentdex)
-    sentdex.to_csv('sentdex.csv')
     return sentdex
 
