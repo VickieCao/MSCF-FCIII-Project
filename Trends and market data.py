@@ -6,7 +6,9 @@ import numpy as np
 import pandas as pd
 #Get tickers - union of earningsurprise and sentiment
 sentdex=sentiment_crawl()
+sentdex.to_csv('sentdex.csv')
 earnings_surprise=earningsurprise_crawl()
+earnings_surprise.to_csv('earnings_surprise.csv')
 
 earnings_surprise['%Surprise']=earnings_surprise['%Surprise'].astype(float)
 earnings_surprise.sort_values(by='%Surprise',ascending=False,inplace=True)
