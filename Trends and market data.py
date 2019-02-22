@@ -8,11 +8,8 @@ import pandas as pd
 sentdex=sentiment_crawl()
 earnings_surprise=earningsurprise_crawl()
 
-sentdex=sentdex[sentdex['Sentiment']=='very good']
 earnings_surprise['%Surprise']=earnings_surprise['%Surprise'].astype(float)
 earnings_surprise.sort_values(by='%Surprise',ascending=False,inplace=True)
-earnings_surprise=earnings_surprise.iloc[0:100]
-#earnings_surprise=earnings_surprise[earnings_surprise['%Surprise'].astype(float)>0]
 sentdex.drop(0,inplace=True)
 Ticker_1=list(sentdex['Ticker'])
 Ticker_2=list(earnings_surprise['Ticker'])
@@ -33,11 +30,11 @@ for ticker in Tickers:
 
 stock_data=pd.concat(stock_data.values(), axis=1, keys=stock_data.keys())
 stock_data.to_csv('stockdata.csv')
-'''
+
 remove_list=['MHFI','NILE','LGF.A','SONO','DPS','MON','COL','CBG','ARG','GAS','TYC','CVC','MJN','PCP','EMC','JDSU','SPOT']
 for item in remove_list:
     Tickers.remove(item)
-
+'''
 #Download google trends
 
 from pytrends.request import TrendReq
