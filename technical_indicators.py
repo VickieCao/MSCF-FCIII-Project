@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import pandas_datareader as web
 from stock_pool_selection import stockpool_select
+from Gtrends_change import *
 
 
 # input: ticker list, can customize N, start, end date
@@ -59,6 +60,7 @@ def technical_ARBR(Tickers, N=14, start='2019-02-01', end='2019-02-23'):
     ARBR_score = [1 if np.logical_and(BR[i]<AR[i], BR[i]<30) else 0 for i in range(len(AR))]
     return ARBR_score
 
+# Encapsulation later
 
 def get_score(Tickers, start='2019-02-01', end='2019-02-23'):
     stock_data = web.get_data_yahoo(Tickers, start=start, end=end)
@@ -69,13 +71,13 @@ def get_score(Tickers, start='2019-02-01', end='2019-02-23'):
     df['ROC_score'] = technical_ROC(Tickers)
     df['MFI_score'] = technical_MFI(Tickers)
     df['ARBR_score'] = technical_ARBR(Tickers)
+    df['Gtrends_score'] = Gtrends_change(Tickers)
     return df
 
-# Encapsulation later
-    
 earnings_surprise = pd.read_csv("D:/Daily Tasks/CMU MSCF/Mini 3/Financial Computing III/Group Project/Data/earnings_surprise.csv")
 sentdex = pd.read_csv("D:/Daily Tasks/CMU MSCF/Mini 3/Financial Computing III/Group Project/Data/sentdex.csv")
 stockpool_Tickers = stockpool_select(earnings_surprise, sentdex)
+
 
 score = get_score(stockpool_Tickers)
 score.to_csv("stock_score.csv")
