@@ -10,5 +10,5 @@ def Gtrends_change(Tickers):
     last_week_av=Gtrends[Tickers].iloc[0:7].mean()
     res=this_week_av-last_week_av
     res.loc[res>0]=1
-    res.loc[res<=0]=-1
+    res.loc[res<=0]=0
     return res
